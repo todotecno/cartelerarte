@@ -1,3 +1,3 @@
 # Esta es la web para la cartelera de arte de Roma 2026
-#Este es el repositorio en donde esta guardado la web
+Este es el repositorio en donde esta guardado la web
 # Creado por Roma
