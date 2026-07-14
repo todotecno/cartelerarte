@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historia del Arte en siete miradas · Día de Arte 2026</title>
+<meta name="description" content="Recorrido digital por las bellas artes, los grandes períodos artísticos, el muralismo y el pop art — complemento del corredor de murales del Día de Arte 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#121110;
+    --panel:#1a1917;
+    --panel-2:#201e1b;
+    --text:#ece7dc;
+    --muted:#a39c8e;
+    --faint: rgba(236,231,220,0.10);
+    --magenta:#e8407b;
+    --amber:#f0a93a;
+    --teal:#2fb6a8;
+    --violet:#8b6fd9;
+    --lime:#a8d93a;
+    --wine:#8a2f3f;
+    --sky:#4a9ab0;
+    --lede:#cfc9bc;
+    --font-display:'Bebas Neue', sans-serif;
+    --font-serif:'Fraunces', serif;
+    --font-body:'Inter', sans-serif;
+    --maxw:1080px;
+  }
+  html[data-theme="light"]{
+    --ink:#f4efe4;
+    --panel:#ffffff;
+    --panel-2:#efe9db;
+    --text:#1c1a16;
+    --muted:#726b5d;
+    --faint: rgba(28,26,22,0.10);
+    --lede:#4a4438;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    transition:background .35s ease, color .35s ease;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+
+  /* progress bar = "walking the corridor" */
+  #progress{
+    position:fixed; top:0; left:0; height:4px; width:0%;
+    background:linear-gradient(90deg,var(--magenta),var(--amber),var(--lime),var(--sky),var(--violet));
+    z-index:1000; transition:width .1s linear;
+  }
+
+  /* dot nav */
+  #dotnav{
+    position:fixed; right:28px; top:50%; transform:translateY(-50%);
+    display:flex; flex-direction:column; gap:14px; z-index:900;
+  }
+  #dotnav a{
+    width:9px; height:9px; border-radius:50%;
+    background:var(--faint); display:block; position:relative;
+    transition:background .25s, transform .25s;
+  }
+  #dotnav a.active{background:var(--amber); transform:scale(1.4);}
+  #dotnav a span{
+    position:absolute; right:20px; top:50%; transform:translateY(-50%);
+    font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    white-space:nowrap; color:var(--muted);
+    opacity:0; pointer-events:none; transition:opacity .2s;
+  }
+  #dotnav a:hover span{opacity:1;}
+  @media (max-width:900px){ #dotnav{display:none;} }
+
+  #theme-toggle{
+    position:fixed; top:26px; right:28px; z-index:900;
+    width:46px; height:46px; border-radius:50%;
+    background:var(--panel); border:1px solid var(--faint);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:transform .25s, border-color .25s, background .35s;
+  }
+  #theme-toggle:hover{transform:scale(1.08); border-color:var(--amber);}
+  #theme-toggle svg{width:20px; height:20px; stroke:var(--text); fill:none; stroke-width:1.8;}
+  #theme-toggle .sun{display:none;}
+  html[data-theme="light"] #theme-toggle .moon{display:none;}
+  html[data-theme="light"] #theme-toggle .sun{display:block;}
+  @media (max-width:560px){ #theme-toggle{top:18px; right:18px; width:42px; height:42px;} }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  section{padding:110px 0; position:relative; border-top:1px solid var(--faint);}
+  section:first-of-type{border-top:none;}
+
+  .eyebrow{
+    font-family:var(--font-body); font-weight:700; font-size:12px;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+    display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--accent,var(--amber));}
+
+  h1,h2,h3{font-family:var(--font-display); font-weight:400; letter-spacing:.01em; margin:0;}
+  h2{font-size:clamp(2.4rem,5vw,4rem); line-height:.95; margin-bottom:26px;}
+  h2 em{font-style:normal; color:var(--accent,var(--amber));}
+  p{color:var(--text); max-width:640px;}
+  .lede{font-family:var(--font-serif); font-size:1.15rem; color:var(--lede,#cfc9bc); max-width:620px; font-weight:400;}
+
+  /* ---------- HERO ---------- */
+  #hero{
+    min-height:100svh; display:flex; align-items:center; border-top:none;
+    padding-top:140px; padding-bottom:80px; overflow:hidden;
+  }
+  #hero .blobs{position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none;}
+  #hero .blob{position:absolute; border-radius:50%; filter:blur(70px); opacity:.35;}
+  .b1{width:420px;height:420px; background:var(--magenta); top:-120px; left:-100px;}
+  .b2{width:380px;height:380px; background:var(--sky); bottom:-140px; right:-80px;}
+  .b3{width:260px;height:260px; background:var(--lime); bottom:120px; left:38%;}
+  #hero .content{position:relative; z-index:1;}
+  #hero .kicker{font-family:var(--font-body); font-weight:700; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--amber); margin-bottom:22px;}
+  #hero h1{font-size:clamp(3.2rem,8.5vw,6.6rem); line-height:.92;}
+  #hero h1 .line2{display:block; background:linear-gradient(92deg,var(--magenta),var(--amber) 35%,var(--lime) 60%,var(--sky) 85%); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  #hero .lede{margin-top:26px; font-size:1.25rem;}
+  .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:38px;}
+  .chip{
+    border:1px solid var(--faint); border-radius:999px; padding:9px 18px;
+    font-size:13px; color:var(--muted); font-weight:500;
+    display:flex; align-items:center; gap:8px;
+  }
+  .chip i{width:8px; height:8px; border-radius:50%; background:var(--dot,var(--amber));}
+  .scrolldown{
+    margin-top:56px; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:10px;
+  }
+  .scrolldown .arrow{width:1px; height:34px; background:linear-gradient(var(--muted),transparent); animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%,100%{opacity:.3;}50%{opacity:1;}}
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+  /* ---------- 7 ARTES ---------- */
+  .arts-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:10px;}
+  @media (max-width:800px){.arts-grid{grid-template-columns:repeat(2,1fr);}}
+  .art-card{
+    background:var(--panel); border:1px solid var(--faint); border-radius:14px;
+    padding:22px 18px; min-height:150px; display:flex; flex-direction:column; justify-content:space-between;
+    transition:transform .25s, border-color .25s;
+  }
+  .art-card:hover{transform:translateY(-4px); border-color:var(--c,var(--amber));}
+  .art-card .num{font-family:var(--font-display); font-size:2rem; color:var(--c,var(--amber)); line-height:1;}
+  .art-card .name{font-weight:600; font-size:1.05rem; margin-top:14px;}
+  .art-card .desc{font-size:.85rem; color:var(--muted); margin-top:6px;}
+  .art-card.wide{grid-column:span 2;}
+  @media (max-width:800px){.art-card.wide{grid-column:span 2;}}
+
+  .footnote{
+    margin-top:34px; padding:18px 22px; border-left:2px solid var(--accent,var(--amber));
+    background:var(--panel); border-radius:0 10px 10px 0; font-size:.92rem; color:var(--muted); max-width:640px;
+  }
+  .footnote b{color:var(--text);}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline-strip{
+    display:flex; gap:16px; overflow-x:auto; padding:20px 4px 30px;
+    scroll-snap-type:x proximity; margin-top:10px; -webkit-overflow-scrolling:touch;
+  }
+  .timeline-strip::-webkit-scrollbar{height:6px;}
+  .timeline-strip::-webkit-scrollbar-thumb{background:var(--faint); border-radius:3px;}
+  .era{
+    scroll-snap-align:start; min-width:250px; max-width:250px;
+    background:var(--panel); border-radius:16px; overflow:hidden; border:1px solid var(--faint);
+    flex-shrink:0; display:flex; flex-direction:column;
+  }
+  .era .swatch{height:90px; background:var(--c);}
+  .era .body{padding:18px;}
+  .era .dates{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted);}
+  .era h3{font-family:var(--font-serif); font-weight:600; font-style:italic; font-size:1.25rem; margin-top:6px; color:var(--text);}
+  .era p{font-size:.86rem; color:var(--muted); margin-top:8px; max-width:none;}
+  .timeline-hint{font-size:12px; color:var(--muted); text-align:right; margin-top:-8px;}
+
+  /* ---------- MURALISMO / POP ART ---------- */
+  .split{display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:start;}
+  @media (max-width:820px){.split{grid-template-columns:1fr;}}
+  .fact-card{
+    background:var(--panel); border:1px solid var(--faint); border-radius:16px; padding:26px;
+  }
+  .fact-card h3{font-family:var(--font-body); font-weight:700; font-size:.95rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent,var(--amber)); margin-bottom:14px;}
+  .fact-card ul{margin:0; padding-left:18px; color:var(--muted); font-size:.92rem;}
+  .fact-card li{margin-bottom:8px;}
+  .trio{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:26px;}
+  @media (max-width:700px){.trio{grid-template-columns:1fr;}}
+  .trio .who{background:var(--panel); border:1px solid var(--faint); border-radius:12px; padding:18px;}
+  .trio .who .role{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--magenta);}
+  .trio .who .name{font-family:var(--font-serif); font-style:italic; font-size:1.15rem; margin-top:4px;}
+  .trio .who p{font-size:.85rem; color:var(--muted); margin-top:8px;}
+
+  .tag-row{display:flex; flex-wrap:wrap; gap:10px; margin:24px 0;}
+  .tag{border:1px solid var(--faint); border-radius:8px; padding:8px 14px; font-size:.82rem; color:var(--text); background:var(--panel-2);}
+
+  /* ---------- ARTISTAS ---------- */
+  .artists{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  @media (max-width:820px){.artists{grid-template-columns:1fr;}}
+  .artist-card{
+    border-radius:20px; padding:32px 28px; border:1px solid var(--faint);
+    background:linear-gradient(160deg, var(--panel), var(--panel-2));
+    position:relative; overflow:hidden;
+  }
+  .artist-card::after{
+    content:''; position:absolute; width:220px; height:220px; border-radius:50%;
+    background:var(--glow); filter:blur(60px); opacity:.5; right:-60px; top:-60px;
+  }
+  .artist-card .years{font-size:12px; letter-spacing:.1em; color:var(--muted); text-transform:uppercase;}
+  .artist-card h3{font-family:var(--font-display); font-size:2.4rem; margin-top:6px; position:relative;}
+  .artist-card p{color:var(--lede,#cfc9bc); font-size:.94rem; position:relative;}
+  .artist-card .works{margin-top:18px; padding-top:16px; border-top:1px solid var(--faint); position:relative;}
+  .artist-card .works span{display:block; font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:8px;}
+  .artist-card .works em{font-family:var(--font-serif); font-style:italic; display:block; font-size:.95rem; color:var(--text); margin-bottom:4px;}
+  .common-ground{
+    margin-top:22px; text-align:center; font-family:var(--font-serif); font-style:italic;
+    color:var(--muted); font-size:1.05rem; max-width:560px; margin-left:auto; margin-right:auto;
+  }
+
+  /* ---------- RECORRIDO ---------- */
+  .map-list{display:flex; flex-direction:column; margin-top:10px;}
+  .map-item{
+    display:grid; grid-template-columns:56px 1fr; gap:20px; padding:22px 0; border-top:1px solid var(--faint);
+  }
+  .map-item:last-child{border-bottom:1px solid var(--faint);}
+  .map-item .dot{
+    width:14px; height:14px; border-radius:50%; background:var(--c); margin-top:6px;
+  }
+  .map-item .name{font-family:var(--font-serif); font-style:italic; font-size:1.3rem;}
+  .map-item p{color:var(--muted); font-size:.92rem; margin-top:6px;}
+
+  /* ---------- FUENTES ---------- */
+  .sources-group{margin-bottom:30px;}
+  .sources-group h4{font-size:.85rem; text-transform:uppercase; letter-spacing:.08em; color:var(--amber); margin-bottom:10px; font-weight:700; font-family:var(--font-body);}
+  .sources-group ul{list-style:none; margin:0; padding:0;}
+  .sources-group li{padding:10px 0; border-top:1px solid var(--faint); font-size:.9rem;}
+  .sources-group li a{color:var(--text); text-decoration:none; word-break:break-word;}
+  .sources-group li a:hover{color:var(--amber);}
+  .note{font-size:.85rem; color:var(--muted); border-top:1px dashed var(--faint); padding-top:18px; margin-top:10px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:80px 0 60px; text-align:center; border-top:1px solid var(--faint);
+  }
+  footer .mark{font-family:var(--font-display); font-size:clamp(1.8rem,4vw,2.6rem); letter-spacing:.02em;}
+  footer .credit{margin-top:16px; color:var(--muted); font-size:.92rem; max-width:520px; margin-left:auto; margin-right:auto;}
+  footer .names{color:var(--text); font-weight:600;}
+  footer .year{margin-top:26px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted);}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<button id="theme-toggle" aria-label="Cambiar a modo claro" title="Cambiar tema">
+  <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-linecap="round"/></svg>
+</button>
+<nav id="dotnav">
+  <a href="#hero" data-label="Inicio"><span>Inicio</span></a>
+  <a href="#clasificacion" data-label="01"><span>Clasificación</span></a>
+  <a href="#linea-tiempo" data-label="02"><span>Línea de tiempo</span></a>
+  <a href="#muralismo" data-label="03"><span>Muralismo</span></a>
+  <a href="#popart" data-label="04"><span>Pop Art</span></a>
+  <a href="#artistas" data-label="05"><span>Kahlo &amp; Van Gogh</span></a>
+  <a href="#recorrido" data-label="06"><span>Recorrido</span></a>
+  <a href="#fuentes" data-label="07"><span>Fuentes</span></a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="hero">
+  <div class="blobs">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+  <div class="wrap content">
+    <div class="kicker">Día de Arte · Corredor de murales · 2026</div>
+    <h1>Historia del Arte<span class="line2">en siete miradas</span></h1>
+    <p class="lede">Un recorrido breve por las bellas artes, los grandes períodos artísticos y los dos movimientos que laten en los murales del pasillo: el muralismo y el pop art.</p>
+    <div class="chips">
+      <div class="chip" style="--dot:var(--magenta)"><i></i>7 bellas artes</div>
+      <div class="chip" style="--dot:var(--wine)"><i></i>Muralismo mexicano</div>
+      <div class="chip" style="--dot:var(--amber)"><i></i>Pop Art</div>
+      <div class="chip" style="--dot:var(--sky)"><i></i>Frida Kahlo · Van Gogh</div>
+    </div>
+    <div class="scrolldown"><div class="arrow"></div>Scrolleá para recorrer el corredor</div>
+  </div>
+</section>
+
+<!-- ============ 01 CLASIFICACIÓN ============ -->
+<section id="clasificacion" style="--accent:var(--magenta)">
+  <div class="wrap">
+    <div class="eyebrow" style="--accent:var(--magenta)">01 · Clasificación</div>
+    <h2 class="reveal">Las siete <em style="--accent:var(--magenta)">bellas artes</em></h2>
+    <p class="lede reveal">En 1746 el filósofo francés Charles Batteux propuso la primera clasificación de las "bellas artes", con seis disciplinas. Casi dos siglos después, en 1911, el crítico italiano Ricciotto Canudo sumó al cine como el "séptimo arte" —un "arte plástico en movimiento" capaz de reunir a todas las anteriores— cerrando la lista que hoy conocemos.</p>
+
+    <div class="arts-grid reveal">
+      <div class="art-card" style="--c:var(--amber)"><div class="num">01</div><div><div class="name">Arquitectura</div><div class="desc">Diseñar y construir espacios: de las pirámides a los rascacielos.</div></div></div>
+      <div class="art-card" style="--c:var(--sky)"><div class="num">02</div><div><div class="name">Escultura</div><div class="desc">Dar forma tridimensional a la piedra, el metal o la madera.</div></div></div>
+      <div class="art-card" style="--c:var(--magenta)"><div class="num">03</div><div><div class="name">Pintura</div><div class="desc">Color y forma sobre una superficie: del fresco al lienzo.</div></div></div>
+      <div class="art-card" style="--c:var(--lime)"><div class="num">04</div><div><div class="name">Música</div><div class="desc">Organizar el sonido y el silencio en el tiempo.</div></div></div>
+      <div class="art-card" style="--c:var(--violet)"><div class="num">05</div><div><div class="name">Literatura</div><div class="desc">La palabra escrita como herramienta de creación.</div></div></div>
+      <div class="art-card" style="--c:var(--wine)"><div class="num">06</div><div><div class="name">Danza</div><div class="desc">El cuerpo en movimiento como lenguaje expresivo.</div></div></div>
+      <div class="art-card wide" style="--c:var(--amber)"><div class="num">07</div><div><div class="name">Cine — el séptimo arte</div><div class="desc">Ricciotto Canudo lo llamó "arte plástico en movimiento", capaz de reunir a todas las artes anteriores en una sola pantalla.</div></div></div>
+    </div>
+
+    <div class="footnote reveal" style="--accent:var(--magenta)">
+      <b>Dato clave:</b> algunos autores propusieron sumar disciplinas modernas como la fotografía, la historieta o los videojuegos, pero no existe consenso: las siete bellas artes siguen siendo la clasificación tradicional más reconocida.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 LÍNEA DE TIEMPO ============ -->
+<section id="linea-tiempo" style="--accent:var(--sky)">
+  <div class="wrap">
+    <div class="eyebrow" style="--accent:var(--sky)">02 · Línea de tiempo</div>
+    <h2 class="reveal">Grandes <em style="--accent:var(--sky)">períodos artísticos</em></h2>
+    <p class="lede reveal">A lo largo de la historia, el arte fue cambiando de forma junto con las sociedades que lo produjeron. Deslizá para recorrer once momentos, de la prehistoria a hoy.</p>
+
+    <div class="timeline-strip reveal">
+      <div class="era"><div class="swatch" style="--c:#8a6a4a"></div><div class="body"><div class="dates">40.000–3.000 a.C.</div><h3>Prehistórico</h3><p>Pinturas rupestres con fines rituales y de supervivencia.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#c98a3f"></div><div class="body"><div class="dates">3.000 a.C.–476 d.C.</div><h3>Antiguo</h3><p>Egipto, Grecia y Roma: arte funerario, armonía y grandes obras de ingeniería.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#6a5a8a"></div><div class="body"><div class="dates">Siglos V–XV</div><h3>Medieval</h3><p>Románico y gótico: el arte al servicio de la religión, catedrales y vitrales.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#d9a441"></div><div class="body"><div class="dates">Siglos XV–XVI</div><h3>Renacimiento</h3><p>Perspectiva, humanismo y el regreso a la Antigüedad clásica. Da Vinci, Miguel Ángel.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#8a2f3f"></div><div class="body"><div class="dates">Siglos XVII–XVIII</div><h3>Barroco</h3><p>Drama y contrastes de luz y sombra. Caravaggio, Velázquez, Rembrandt.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#4a6a8a"></div><div class="body"><div class="dates">Siglo XVIII</div><h3>Neoclasicismo</h3><p>Orden, equilibrio y racionalidad, inspirados en Grecia y Roma.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#b8562f"></div><div class="body"><div class="dates">Siglo XIX</div><h3>Romanticismo</h3><p>Exaltación de los sentimientos, la libertad y la naturaleza.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#5a6a4a"></div><div class="body"><div class="dates">Siglo XIX</div><h3>Realismo</h3><p>La vida cotidiana y los problemas sociales, sin idealizar.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#4a9ab0"></div><div class="body"><div class="dates">Fin. Siglo XIX</div><h3>Impresionismo</h3><p>Luz, color e instante captados al aire libre. Monet, Renoir, Degas.</p></div></div>
+      <div class="era"><div class="swatch" style="background:linear-gradient(135deg,var(--magenta),var(--violet))"></div><div class="body"><div class="dates">Siglo XX</div><h3>Arte Moderno</h3><p>Cubismo, surrealismo y Pop Art: la libertad creativa estalla en mil direcciones.</p></div></div>
+      <div class="era"><div class="swatch" style="background:linear-gradient(135deg,var(--lime),var(--sky),var(--magenta))"></div><div class="body"><div class="dates">Desde 1950</div><h3>Arte Contemporáneo</h3><p>Instalaciones, arte digital y arte urbano: el mismo corredor donde estás parado.</p></div></div>
+    </div>
+    <div class="timeline-hint">← deslizá para ver más →</div>
+  </div>
+</section>
+
+<!-- ============ 03 MURALISMO ============ -->
+<section id="muralismo" style="--accent:var(--wine)">
+  <div class="wrap">
+    <div class="eyebrow" style="--accent:var(--wine)">03 · Arte público</div>
+    <h2 class="reveal">El muralismo: <em style="--accent:var(--wine)">la pared como libro</em></h2>
+
+    <div class="split reveal">
+      <div>
+        <p class="lede">Nació en México en la década de 1920, tras la Revolución, impulsado por José Vasconcelos desde el gobierno posrevolucionario. La idea: usar las paredes de los edificios públicos como un lenguaje visual monumental, para que un pueblo mayoritariamente analfabeto pudiera comprender su propia historia, sus luchas y su herencia cultural.</p>
+        <p>Sus tres grandes referentes —"los tres grandes"— fueron <b>Diego Rivera</b>, <b>David Alfaro Siqueiros</b> y <b>José Clemente Orozco</b>. Cada uno abordó la temática revolucionaria desde un ángulo distinto: Rivera, la clase obrera y campesina; Siqueiros, los héroes revolucionarios con una estética experimental; Orozco, el sufrimiento humano con una mirada trágica.</p>
+        <p>Esta idea —el arte como patrimonio colectivo, y no de unos pocos— influyó en toda América Latina, desde Antonio Berni en Argentina hasta el arte urbano actual en ciudades como Buenos Aires, Madrid o Barcelona. Es la misma idea que hoy sostiene a los murales de este corredor.</p>
+      </div>
+      <div class="fact-card" style="--accent:var(--wine)">
+        <h3>Datos clave</h3>
+        <ul>
+          <li>Diego Rivera trabajaba con la técnica del <b>fresco</b>: pintar sobre yeso húmedo, lo que da a los murales una durabilidad excepcional.</li>
+          <li>Estuvo casado con Frida Kahlo, hoy la artista mexicana más reproducida del arte contemporáneo.</li>
+          <li>Entre sus murales más conocidos: <em style="font-family:var(--font-serif)">México a través de los siglos</em> (Palacio Nacional) y su obra en el Rockefeller Center, Nueva York.</li>
+          <li>El muralismo buscaba explícitamente sacar el arte de los museos y ponerlo al alcance de cualquier persona en el espacio público.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 POP ART ============ -->
+<section id="popart" style="--accent:var(--amber)">
+  <div class="wrap">
+    <div class="eyebrow" style="--accent:var(--amber)">04 · Cultura de masas</div>
+    <h2 class="reveal">Pop Art: <em style="--accent:var(--amber)">el arte de todos los días</em></h2>
+    <p class="lede reveal">Surgió a mediados de los años 50 en Gran Bretaña, de la mano del Independent Group (Londres, 1952). La exposición <em style="font-family:var(--font-serif)">This Is Tomorrow</em> (1956) es su hito fundacional, y se le atribuye al crítico Lawrence Alloway haber acuñado el término. Se consolidó en Estados Unidos a comienzos de los años 60 con Andy Warhol y Roy Lichtenstein en Nueva York, tomando imágenes de la publicidad, los cómics y las celebridades para convertirlas en obra de arte — y cuestionando qué puede o no llamarse "arte".</p>
+
+    <div class="tag-row reveal">
+      <div class="tag">Colores planos y vibrantes</div>
+      <div class="tag">Íconos reconocibles</div>
+      <div class="tag">Serigrafía</div>
+      <div class="tag">Cultura de consumo</div>
+      <div class="tag">Reproducción en serie</div>
+    </div>
+
+    <div class="footnote reveal" style="--accent:var(--amber)">
+      Andy Warhol convirtió una lata de sopa Campbell's en un ícono mundial del arte y transformó su estudio neoyorquino, <b>The Factory</b>, en un centro de producción artística en serie. El mural del corredor que combina el rostro de Frida Kahlo con salpicaduras de color, un aerosol y el skyline de Nueva York toma prestado justamente ese lenguaje: íconos + color + collage urbano.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 ARTISTAS ============ -->
+<section id="artistas" style="--accent:var(--violet)">
+  <div class="wrap">
+    <div class="eyebrow" style="--accent:var(--violet)">05 · Dos artistas</div>
+    <h2 class="reveal">Frida Kahlo <em style="--accent:var(--violet)">&amp;</em> Vincent van Gogh</h2>
+
+    <div class="artists reveal">
+      <div class="artist-card" style="--glow:var(--magenta)">
+        <div class="years">México · 1907–1954</div>
+        <h3>Frida Kahlo</h3>
+        <p>Conocida sobre todo por sus autorretratos, donde plasmó su identidad y su dolor físico y emocional. Vinculada al surrealismo, aunque ella decía pintar "su propia realidad". Estuvo casada con el muralista Diego Rivera. Hoy es, además, uno de los íconos más reproducidos de la cultura pop contemporánea.</p>
+        <div class="works">
+          <span>Obras clave</span>
+          <em>Las dos Fridas (1939)</em>
+          <em>La columna rota (1944)</em>
+          <em>Autorretrato con collar de espinas y colibrí (1940)</em>
+        </div>
+      </div>
+      <div class="artist-card" style="--glow:var(--sky)">
+        <div class="years">Países Bajos · 1853–1890</div>
+        <h3>Vincent van Gogh</h3>
+        <p>Postimpresionista: color intenso y pincelada expresiva. Vendió muy poco en vida y fue reconocido recién después de morir. Produjo más de 2.000 obras entre pinturas y dibujos en apenas diez años.</p>
+        <div class="works">
+          <span>Obras clave</span>
+          <em>La noche estrellada (1889)</em>
+          <em>Los girasoles (serie)</em>
+          <em>Campo de trigo con cuervos (1890)</em>
+        </div>
+      </div>
+    </div>
+
+    <p class="common-ground reveal">"Nunca se conocieron, pero ambos transformaron el sufrimiento personal en obras que hoy son patrimonio del mundo entero."</p>
+  </div>
+</section>
+
+<!-- ============ 06 RECORRIDO ============ -->
+<section id="recorrido" style="--accent:var(--lime)">
+  <div class="wrap">
+    <div class="eyebrow" style="--accent:var(--lime)">06 · Recorrido</div>
+    <h2 class="reveal">Las siete artes, <em style="--accent:var(--lime)">en el corredor</em></h2>
+    <p class="lede reveal">Cada rincón del mural representa una de las bellas artes o un movimiento de esta historia. Un mapa rápido para recorrerlo con la mirada:</p>
+
+    <div class="map-list reveal">
+      <div class="map-item"><div class="dot" style="--c:var(--amber)"></div><div><div class="name">Cine</div><p>Claqueta, tira de película, alfombra roja y silueta de camarógrafo.</p></div></div>
+      <div class="map-item"><div class="dot" style="--c:var(--wine)"></div><div><div class="name">Danza</div><p>La bailarina en salto, pintando un arcoíris con su propio movimiento.</p></div></div>
+      <div class="map-item"><div class="dot" style="--c:var(--violet)"></div><div><div class="name">Música</div><p>Discos de vinilo, piano y tambores.</p></div></div>
+      <div class="map-item"><div class="dot" style="--c:var(--sky)"></div><div><div class="name">Literatura</div><p>"¿Qué libro te cambió la vida?" y libros de los que nacen corazones.</p></div></div>
+      <div class="map-item"><div class="dot" style="--c:var(--lime)"></div><div><div class="name">Fotografía</div><p>La silueta con cámara, retratando la escena urbana.</p></div></div>
+      <div class="map-item"><div class="dot" style="--c:var(--magenta)"></div><div><div class="name">Pintura · Muralismo · Pop Art</div><p>Frida Kahlo, el pincel-arcoíris y las salpicaduras de color estilo pop.</p></div></div>
+    </div>
+
+    <div class="footnote reveal" style="--accent:var(--lime)">
+      En conjunto, el corredor funciona como una síntesis visual de la Historia del Arte: de la clasificación clásica de las bellas artes al muralismo y el pop art, dos movimientos que compartieron una misma idea — sacar el arte del museo y ponerlo al alcance de todos.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 FUENTES ============ -->
+<section id="fuentes" style="--accent:var(--sky)">
+  <div class="wrap">
+    <div class="eyebrow" style="--accent:var(--sky)">07 · Fuentes consultadas</div>
+    <h2 class="reveal">Para seguir <em style="--accent:var(--sky)">investigando</em></h2>
+    <p class="lede reveal">El contenido de esta web fue redactado y sintetizado a partir de estas fuentes; no se reproducen fragmentos textuales extensos de ningún sitio, para respetar los derechos de autor de cada publicación.</p>
+
+    <div class="reveal" style="margin-top:30px;">
+      <div class="sources-group">
+        <h4>Períodos generales de la Historia del Arte</h4>
+        <ul>
+          <li><a href="https://es.wikipedia.org/wiki/Historia_del_arte" target="_blank" rel="noopener">Historia del arte — Wikipedia</a></li>
+          <li><a href="https://www.superprof.es/blog/historia-evolucion-artistica/" target="_blank" rel="noopener">Superprof — Historia de la pintura: las diferentes etapas del arte</a></li>
+          <li><a href="https://www.euroinnova.com/blog/historia-del-arte-etapas" target="_blank" rel="noopener">Euroinnova — Las etapas de la historia del arte</a></li>
+          <li><a href="https://www.kunstplaza.de/es/historia-del-arte/panorama-de-los-periodos-artisticos/" target="_blank" rel="noopener">Kunstplaza — Panorama de los períodos artísticos</a></li>
+        </ul>
+      </div>
+      <div class="sources-group">
+        <h4>Las siete bellas artes / el cine como séptimo arte</h4>
+        <ul>
+          <li><a href="https://es.wikipedia.org/wiki/Bellas_artes" target="_blank" rel="noopener">Bellas artes — Wikipedia</a></li>
+          <li><a href="https://billiken.lat/saber-mas/bellas-artes-cuales-son-las-siete-y-donde-surgio-el-termino/" target="_blank" rel="noopener">Billiken — Bellas artes: ¿cuáles son las siete y dónde surgió el término?</a></li>
+          <li><a href="https://www.telecinco.es/noticias/cultura/20240128/por-que-cine-llama-septimo-arte-be5m_18_011437365.html" target="_blank" rel="noopener">Telecinco — El origen de que al cine se le conozca como el séptimo arte</a></li>
+          <li><a href="https://www.revistacentral.com.mx/cultura/las-7-bellas-artes-una-clasificacion-tradicional-nuevas-perspectivas" target="_blank" rel="noopener">Revista Central — Las 7 Bellas Artes: una clasificación tradicional con nuevas perspectivas</a></li>
+        </ul>
+      </div>
+      <div class="sources-group">
+        <h4>Muralismo mexicano / Diego Rivera</h4>
+        <ul>
+          <li><a href="https://es.wikipedia.org/wiki/Diego_Rivera" target="_blank" rel="noopener">Diego Rivera — Wikipedia</a></li>
+          <li><a href="https://comunicacionsocial.diputados.gob.mx/revista/index.php/raices/diego-rivera-el-color-del-nacionalismo" target="_blank" rel="noopener">Revista Cámara — Diego Rivera, el color del nacionalismo</a></li>
+          <li><a href="https://www.ellitoral.com/arte/arte-creadores-siglo-xx-muralismo-mexico-diego-rivera_0_HIYA1QXs8p.html" target="_blank" rel="noopener">El Litoral — Diego Rivera: maestro del muralismo y visionario del cambio social</a></li>
+          <li><a href="https://www.hoyesarte.com/artes-visuales/arte-urbano-artes-visuales/del-muralismo-mexicano-de-rivera-al-arte-urbano_331907/" target="_blank" rel="noopener">hoyesarte.com — Del muralismo mexicano de Rivera al arte urbano</a></li>
+          <li><a href="https://mymodernmet.com/es/murales-diego-rivera/" target="_blank" rel="noopener">MyModernMet — Murales de Diego Rivera</a></li>
+          <li><a href="https://www.antofagasta.tv/categoria/magazine/evolucion-muralismo-mexicano-diego-rivera-actualidad" target="_blank" rel="noopener">Antofagasta TV — La evolución del muralismo mexicano desde Diego Rivera hasta la actualidad</a></li>
+        </ul>
+      </div>
+      <div class="sources-group">
+        <h4>Pop Art / Andy Warhol</h4>
+        <ul>
+          <li><a href="https://www.domestika.org/es/blog/6379-pop-art-que-es-caracteristicas-y-artistas-relevantes" target="_blank" rel="noopener">Domestika — Pop Art: qué es, características y artistas relevantes</a></li>
+          <li><a href="https://www.ifema.es/noticias/arte/pop-art-que-es-artistas-caracteristicas" target="_blank" rel="noopener">IFEMA Madrid — Pop Art: qué es, artistas, obras y características</a></li>
+          <li><a href="https://es.wikipedia.org/wiki/Andy_Warhol" target="_blank" rel="noopener">Andy Warhol — Wikipedia</a></li>
+          <li><a href="https://www.alejandradeargos.com/index.php/es/completas/32-artistas/41805-andy-warhol-biografia-obras-y-exposiciones" target="_blank" rel="noopener">Alejandra de Argos — Andy Warhol: biografía, obras y exposiciones</a></li>
+        </ul>
+      </div>
+      <div class="sources-group">
+        <h4>Frida Kahlo y Vincent van Gogh</h4>
+        <ul>
+          <li>Material base provisto por el equipo del proyecto (cartelera_arte.pdf), con datos biográficos y obras principales de ambos artistas.</li>
+        </ul>
+      </div>
+      <p class="note">Nota metodológica: todo el contenido fue redactado y sintetizado a partir de estas fuentes. Para citas textuales o mayor profundidad sobre un punto específico, se recomienda visitar el enlace correspondiente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="mark">Día de Arte · 2026</div>
+    <p class="credit">Este sitio es un complemento digital de la cartelera de <em style="font-family:var(--font-serif); font-style:italic;">Historia del Arte 2026</em>, del corredor de murales, creada por <span class="names">Mariano Villares</span> e <span class="names">Ignacio Pujol</span>.</p>
+    <div class="year">Corredor de murales · Día de Arte · 2026</div>
+  </div>
+</footer>
+
+<script>
+  // theme toggle (oscuro por defecto, recuerda la preferencia)
+  const root = document.documentElement;
+  const themeBtn = document.getElementById('theme-toggle');
+  const saved = localStorage.getItem('diadearte-theme');
+  if(saved === 'light'){ root.setAttribute('data-theme','light'); }
+  function syncLabel(){
+    const isLight = root.getAttribute('data-theme') === 'light';
+    themeBtn.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+  }
+  syncLabel();
+  themeBtn.addEventListener('click', ()=>{
+    const isLight = root.getAttribute('data-theme') === 'light';
+    if(isLight){ root.removeAttribute('data-theme'); localStorage.setItem('diadearte-theme','dark'); }
+    else{ root.setAttribute('data-theme','light'); localStorage.setItem('diadearte-theme','light'); }
+    syncLabel();
+  });
+
+  // scroll progress bar
+  const progress = document.getElementById('progress');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = scrolled + '%';
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  // dot nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const dots = document.querySelectorAll('#dotnav a');
+  function updateDots(){
+    let current = sections[0].id;
+    sections.forEach(sec=>{
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= window.innerHeight*0.4) current = sec.id;
+    });
+    dots.forEach(d=>{
+      d.classList.toggle('active', d.getAttribute('href') === '#'+current);
+    });
+  }
+  document.addEventListener('scroll', updateDots, {passive:true});
+  updateDots();
+
+  // reveal on scroll
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
