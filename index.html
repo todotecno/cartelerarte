@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Historia del Arte en siete miradas · Día de Arte 2026</title>
-<meta name="description" content="Recorrido digital por las bellas artes, los grandes períodos artísticos, el muralismo y el pop art — complemento del corredor de murales del Día de Arte 2026.">
+<meta name="description" content="Recorrido digital por las bellas artes, los grandes períodos artísticos, el muralismo y el pop art — complemento del pasillo de murales del Día de Arte 2026.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -163,7 +163,13 @@
   .art-card.wide{grid-column:span 2;}
   @media (max-width:800px){.art-card.wide{grid-column:span 2;}}
 
-  .footnote{
+  .icon-badge{
+    width:56px; height:56px; border-radius:50%; background:var(--accent,var(--amber));
+    display:flex; align-items:center; justify-content:center; margin-bottom:20px;
+  }
+  .icon-badge svg{width:26px; height:26px; stroke:#fff; stroke-width:1.7; fill:none; stroke-linecap:round; stroke-linejoin:round;}
+  .artist-card .icon-badge{width:44px; height:44px; margin-bottom:14px; position:relative;}
+  .artist-card .icon-badge svg{width:20px; height:20px;}
     margin-top:34px; padding:18px 22px; border-left:2px solid var(--accent,var(--amber));
     background:var(--panel); border-radius:0 10px 10px 0; font-size:.92rem; color:var(--muted); max-width:640px;
   }
@@ -181,7 +187,8 @@
     background:var(--panel); border-radius:16px; overflow:hidden; border:1px solid var(--faint);
     flex-shrink:0; display:flex; flex-direction:column;
   }
-  .era .swatch{height:90px; background:var(--c);}
+  .era .swatch{height:90px; background:var(--c); display:flex; align-items:center; justify-content:center;}
+  .era .swatch svg{width:38px; height:38px; color:rgba(255,255,255,.92); fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;}
   .era .body{padding:18px;}
   .era .dates{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted);}
   .era h3{font-family:var(--font-serif); font-weight:600; font-style:italic; font-size:1.25rem; margin-top:6px; color:var(--text);}
@@ -243,9 +250,16 @@
   .map-item p{color:var(--muted); font-size:.92rem; margin-top:6px;}
 
   /* ---------- FUENTES ---------- */
-  .sources-group{margin-bottom:30px;}
-  .sources-group h4{font-size:.85rem; text-transform:uppercase; letter-spacing:.08em; color:var(--amber); margin-bottom:10px; font-weight:700; font-family:var(--font-body);}
-  .sources-group ul{list-style:none; margin:0; padding:0;}
+  .sources-group{margin-bottom:14px; border-top:1px solid var(--faint); padding:4px 0;}
+  .sources-group summary{
+    list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:14px 2px; font-size:.95rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text);
+    font-weight:700; font-family:var(--font-body);
+  }
+  .sources-group summary::-webkit-details-marker{display:none;}
+  .sources-group summary .chev{width:18px; height:18px; stroke:var(--amber); fill:none; stroke-width:2; flex-shrink:0; transition:transform .25s;}
+  .sources-group[open] summary .chev{transform:rotate(180deg);}
+  .sources-group ul{list-style:none; margin:0; padding:0 2px 14px;}
   .sources-group li{padding:10px 0; border-top:1px solid var(--faint); font-size:.9rem;}
   .sources-group li a{color:var(--text); text-decoration:none; word-break:break-word;}
   .sources-group li a:hover{color:var(--amber);}
@@ -296,7 +310,7 @@
       <div class="chip" style="--dot:var(--amber)"><i></i>Pop Art</div>
       <div class="chip" style="--dot:var(--sky)"><i></i>Frida Kahlo · Van Gogh</div>
     </div>
-    <div class="scrolldown"><div class="arrow"></div>Scrolleá para recorrer el corredor</div>
+    <div class="scrolldown"><div class="arrow"></div>Scrolleá para recorrer el pasillo</div>
   </div>
 </section>
 
@@ -331,17 +345,17 @@
     <p class="lede reveal">A lo largo de la historia, el arte fue cambiando de forma junto con las sociedades que lo produjeron. Deslizá para recorrer once momentos, de la prehistoria a hoy.</p>
 
     <div class="timeline-strip reveal">
-      <div class="era"><div class="swatch" style="--c:#8a6a4a"></div><div class="body"><div class="dates">40.000–3.000 a.C.</div><h3>Prehistórico</h3><p>Pinturas rupestres con fines rituales y de supervivencia.</p></div></div>
-      <div class="era"><div class="swatch" style="--c:#c98a3f"></div><div class="body"><div class="dates">3.000 a.C.–476 d.C.</div><h3>Antiguo</h3><p>Egipto, Grecia y Roma: arte funerario, armonía y grandes obras de ingeniería.</p></div></div>
-      <div class="era"><div class="swatch" style="--c:#6a5a8a"></div><div class="body"><div class="dates">Siglos V–XV</div><h3>Medieval</h3><p>Románico y gótico: el arte al servicio de la religión, catedrales y vitrales.</p></div></div>
-      <div class="era"><div class="swatch" style="--c:#d9a441"></div><div class="body"><div class="dates">Siglos XV–XVI</div><h3>Renacimiento</h3><p>Perspectiva, humanismo y el regreso a la Antigüedad clásica. Da Vinci, Miguel Ángel.</p></div></div>
-      <div class="era"><div class="swatch" style="--c:#8a2f3f"></div><div class="body"><div class="dates">Siglos XVII–XVIII</div><h3>Barroco</h3><p>Drama y contrastes de luz y sombra. Caravaggio, Velázquez, Rembrandt.</p></div></div>
-      <div class="era"><div class="swatch" style="--c:#4a6a8a"></div><div class="body"><div class="dates">Siglo XVIII</div><h3>Neoclasicismo</h3><p>Orden, equilibrio y racionalidad, inspirados en Grecia y Roma.</p></div></div>
-      <div class="era"><div class="swatch" style="--c:#b8562f"></div><div class="body"><div class="dates">Siglo XIX</div><h3>Romanticismo</h3><p>Exaltación de los sentimientos, la libertad y la naturaleza.</p></div></div>
-      <div class="era"><div class="swatch" style="--c:#5a6a4a"></div><div class="body"><div class="dates">Siglo XIX</div><h3>Realismo</h3><p>La vida cotidiana y los problemas sociales, sin idealizar.</p></div></div>
-      <div class="era"><div class="swatch" style="--c:#4a9ab0"></div><div class="body"><div class="dates">Fin. Siglo XIX</div><h3>Impresionismo</h3><p>Luz, color e instante captados al aire libre. Monet, Renoir, Degas.</p></div></div>
-      <div class="era"><div class="swatch" style="background:linear-gradient(135deg,var(--magenta),var(--violet))"></div><div class="body"><div class="dates">Siglo XX</div><h3>Arte Moderno</h3><p>Cubismo, surrealismo y Pop Art: la libertad creativa estalla en mil direcciones.</p></div></div>
-      <div class="era"><div class="swatch" style="background:linear-gradient(135deg,var(--lime),var(--sky),var(--magenta))"></div><div class="body"><div class="dates">Desde 1950</div><h3>Arte Contemporáneo</h3><p>Instalaciones, arte digital y arte urbano: el mismo corredor donde estás parado.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#8a6a4a"><svg viewBox="0 0 48 48"><path d="M10 38c2-14 8-24 14-24s12 10 14 24" /><circle cx="18" cy="20" r="2" fill="currentColor" stroke="none"/><circle cx="27" cy="16" r="2" fill="currentColor" stroke="none"/><circle cx="33" cy="24" r="2" fill="currentColor" stroke="none"/></svg></div><div class="body"><div class="dates">40.000–3.000 a.C.</div><h3>Prehistórico</h3><p>Pinturas rupestres con fines rituales y de supervivencia.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#c98a3f"><svg viewBox="0 0 48 48"><path d="M8 40h32M10 40V16M16 40V16M22 40V16M26 40V16M32 40V16M38 40V16M7 16h34l-17-9z"/></svg></div><div class="body"><div class="dates">3.000 a.C.–476 d.C.</div><h3>Antiguo</h3><p>Egipto, Grecia y Roma: arte funerario, armonía y grandes obras de ingeniería.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#6a5a8a"><svg viewBox="0 0 48 48"><path d="M24 6c8 6 8 16 8 16v18H16V22s0-10 8-16z"/><path d="M24 14v26M16 30h16"/></svg></div><div class="body"><div class="dates">Siglos V–XV</div><h3>Medieval</h3><p>Románico y gótico: el arte al servicio de la religión, catedrales y vitrales.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#d9a441"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="15"/><path d="M24 9v30M9 24h30M14 14l20 20M34 14L14 34"/></svg></div><div class="body"><div class="dates">Siglos XV–XVI</div><h3>Renacimiento</h3><p>Perspectiva, humanismo y el regreso a la Antigüedad clásica. Da Vinci, Miguel Ángel.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#8a2f3f"><svg viewBox="0 0 48 48"><path d="M24 6c9 4 15 4 15 4v10c0 12-7 20-15 22-8-2-15-10-15-22V10s6 0 15-4z"/><circle cx="24" cy="21" r="5"/></svg></div><div class="body"><div class="dates">Siglos XVII–XVIII</div><h3>Barroco</h3><p>Drama y contrastes de luz y sombra. Caravaggio, Velázquez, Rembrandt.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#4a6a8a"><svg viewBox="0 0 48 48"><path d="M6 40h36M9 40V20M39 40V20M6 20l18-12 18 12M15 40V24M24 40V24M33 40V24"/></svg></div><div class="body"><div class="dates">Siglo XVIII</div><h3>Neoclasicismo</h3><p>Orden, equilibrio y racionalidad, inspirados en Grecia y Roma.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#b8562f"><svg viewBox="0 0 48 48"><path d="M4 34l10-14 8 9 6-10 16 15z"/><circle cx="35" cy="12" r="4"/></svg></div><div class="body"><div class="dates">Siglo XIX</div><h3>Romanticismo</h3><p>Exaltación de los sentimientos, la libertad y la naturaleza.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#5a6a4a"><svg viewBox="0 0 48 48"><path d="M12 40V22M24 40V14M36 40V26M6 40h36"/><path d="M8 22l4-6 4 3 5-9 5 8 4-4 4 8"/></svg></div><div class="body"><div class="dates">Siglo XIX</div><h3>Realismo</h3><p>La vida cotidiana y los problemas sociales, sin idealizar.</p></div></div>
+      <div class="era"><div class="swatch" style="--c:#4a9ab0"><svg viewBox="0 0 48 48"><circle cx="24" cy="18" r="7"/><path d="M24 4v4M24 28v4M11 18h4M33 18h4M15 9l3 3M33 9l-3 3"/><path d="M6 40c4-6 10-6 14 0s10 6 14 0"/></svg></div><div class="body"><div class="dates">Fin. Siglo XIX</div><h3>Impresionismo</h3><p>Luz, color e instante captados al aire libre. Monet, Renoir, Degas.</p></div></div>
+      <div class="era"><div class="swatch" style="background:linear-gradient(135deg,var(--magenta),var(--violet))"><svg viewBox="0 0 48 48"><path d="M24 6l14 24H10z"/><circle cx="24" cy="30" r="9"/><rect x="8" y="8" width="10" height="10"/></svg></div><div class="body"><div class="dates">Siglo XX</div><h3>Arte Moderno</h3><p>Cubismo, surrealismo y Pop Art: la libertad creativa estalla en mil direcciones.</p></div></div>
+      <div class="era"><div class="swatch" style="background:linear-gradient(135deg,var(--lime),var(--sky),var(--magenta))"><svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="32" rx="2"/><path d="M13 32l7-9 6 6 5-7 7 10" /></svg></div><div class="body"><div class="dates">Desde 1950</div><h3>Arte Contemporáneo</h3><p>Instalaciones, arte digital y arte urbano: el mismo pasillo donde estás parado.</p></div></div>
     </div>
     <div class="timeline-hint">← deslizá para ver más →</div>
   </div>
@@ -351,13 +365,14 @@
 <section id="muralismo" style="--accent:var(--wine)">
   <div class="wrap">
     <div class="eyebrow" style="--accent:var(--wine)">03 · Arte público</div>
+    <div class="icon-badge reveal" style="--accent:var(--wine)"><svg viewBox="0 0 48 48"><rect x="6" y="10" width="36" height="28" rx="1"/><path d="M6 30l10-10 8 7 6-8 12 11"/><circle cx="16" cy="18" r="3"/></svg></div>
     <h2 class="reveal">El muralismo: <em style="--accent:var(--wine)">la pared como libro</em></h2>
 
     <div class="split reveal">
       <div>
         <p class="lede">Nació en México en la década de 1920, tras la Revolución, impulsado por José Vasconcelos desde el gobierno posrevolucionario. La idea: usar las paredes de los edificios públicos como un lenguaje visual monumental, para que un pueblo mayoritariamente analfabeto pudiera comprender su propia historia, sus luchas y su herencia cultural.</p>
         <p>Sus tres grandes referentes —"los tres grandes"— fueron <b>Diego Rivera</b>, <b>David Alfaro Siqueiros</b> y <b>José Clemente Orozco</b>. Cada uno abordó la temática revolucionaria desde un ángulo distinto: Rivera, la clase obrera y campesina; Siqueiros, los héroes revolucionarios con una estética experimental; Orozco, el sufrimiento humano con una mirada trágica.</p>
-        <p>Esta idea —el arte como patrimonio colectivo, y no de unos pocos— influyó en toda América Latina, desde Antonio Berni en Argentina hasta el arte urbano actual en ciudades como Buenos Aires, Madrid o Barcelona. Es la misma idea que hoy sostiene a los murales de este corredor.</p>
+        <p>Esta idea —el arte como patrimonio colectivo, y no de unos pocos— influyó en toda América Latina, desde Antonio Berni en Argentina hasta el arte urbano actual en ciudades como Buenos Aires, Madrid o Barcelona. Es la misma idea que hoy sostiene a los murales de este pasillo.</p>
       </div>
       <div class="fact-card" style="--accent:var(--wine)">
         <h3>Datos clave</h3>
@@ -376,6 +391,7 @@
 <section id="popart" style="--accent:var(--amber)">
   <div class="wrap">
     <div class="eyebrow" style="--accent:var(--amber)">04 · Cultura de masas</div>
+    <div class="icon-badge reveal" style="--accent:var(--amber)"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="4" fill="#fff" stroke="none"/><circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="17"/><path d="M24 4v4M24 40v4M4 24h4M40 24h4"/></svg></div>
     <h2 class="reveal">Pop Art: <em style="--accent:var(--amber)">el arte de todos los días</em></h2>
     <p class="lede reveal">Surgió a mediados de los años 50 en Gran Bretaña, de la mano del Independent Group (Londres, 1952). La exposición <em style="font-family:var(--font-serif)">This Is Tomorrow</em> (1956) es su hito fundacional, y se le atribuye al crítico Lawrence Alloway haber acuñado el término. Se consolidó en Estados Unidos a comienzos de los años 60 con Andy Warhol y Roy Lichtenstein en Nueva York, tomando imágenes de la publicidad, los cómics y las celebridades para convertirlas en obra de arte — y cuestionando qué puede o no llamarse "arte".</p>
 
@@ -388,7 +404,7 @@
     </div>
 
     <div class="footnote reveal" style="--accent:var(--amber)">
-      Andy Warhol convirtió una lata de sopa Campbell's en un ícono mundial del arte y transformó su estudio neoyorquino, <b>The Factory</b>, en un centro de producción artística en serie. El mural del corredor que combina el rostro de Frida Kahlo con salpicaduras de color, un aerosol y el skyline de Nueva York toma prestado justamente ese lenguaje: íconos + color + collage urbano.
+      Andy Warhol convirtió una lata de sopa Campbell's en un ícono mundial del arte y transformó su estudio neoyorquino, <b>The Factory</b>, en un centro de producción artística en serie. El mural del pasillo que combina el rostro de Frida Kahlo con salpicaduras de color, un aerosol y el skyline de Nueva York toma prestado justamente ese lenguaje: íconos + color + collage urbano.
     </div>
   </div>
 </section>
@@ -401,6 +417,7 @@
 
     <div class="artists reveal">
       <div class="artist-card" style="--glow:var(--magenta)">
+        <div class="icon-badge" style="--accent:var(--magenta)"><svg viewBox="0 0 48 48"><circle cx="14" cy="14" r="4"/><circle cx="24" cy="10" r="4"/><circle cx="34" cy="14" r="4"/><circle cx="19" cy="12" r="4"/><circle cx="29" cy="12" r="4"/><path d="M10 22c4 8 24 8 28 0"/></svg></div>
         <div class="years">México · 1907–1954</div>
         <h3>Frida Kahlo</h3>
         <p>Conocida sobre todo por sus autorretratos, donde plasmó su identidad y su dolor físico y emocional. Vinculada al surrealismo, aunque ella decía pintar "su propia realidad". Estuvo casada con el muralista Diego Rivera. Hoy es, además, uno de los íconos más reproducidos de la cultura pop contemporánea.</p>
@@ -412,6 +429,7 @@
         </div>
       </div>
       <div class="artist-card" style="--glow:var(--sky)">
+        <div class="icon-badge" style="--accent:var(--sky)"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="6"/><path d="M24 8v6M24 34v6M8 24h6M34 24h6M12 12l4 4M32 32l4 4M12 36l4-4M32 16l4-4"/></svg></div>
         <div class="years">Países Bajos · 1853–1890</div>
         <h3>Vincent van Gogh</h3>
         <p>Postimpresionista: color intenso y pincelada expresiva. Vendió muy poco en vida y fue reconocido recién después de morir. Produjo más de 2.000 obras entre pinturas y dibujos en apenas diez años.</p>
@@ -432,7 +450,7 @@
 <section id="recorrido" style="--accent:var(--lime)">
   <div class="wrap">
     <div class="eyebrow" style="--accent:var(--lime)">06 · Recorrido</div>
-    <h2 class="reveal">Las siete artes, <em style="--accent:var(--lime)">en el corredor</em></h2>
+    <h2 class="reveal">Las siete artes, <em style="--accent:var(--lime)">en el pasillo</em></h2>
     <p class="lede reveal">Cada rincón del mural representa una de las bellas artes o un movimiento de esta historia. Un mapa rápido para recorrerlo con la mirada:</p>
 
     <div class="map-list reveal">
@@ -445,7 +463,7 @@
     </div>
 
     <div class="footnote reveal" style="--accent:var(--lime)">
-      En conjunto, el corredor funciona como una síntesis visual de la Historia del Arte: de la clasificación clásica de las bellas artes al muralismo y el pop art, dos movimientos que compartieron una misma idea — sacar el arte del museo y ponerlo al alcance de todos.
+      En conjunto, el pasillo funciona como una síntesis visual de la Historia del Arte: de la clasificación clásica de las bellas artes al muralismo y el pop art, dos movimientos que compartieron una misma idea — sacar el arte del museo y ponerlo al alcance de todos.
     </div>
   </div>
 </section>
@@ -458,26 +476,26 @@
     <p class="lede reveal">El contenido de esta web fue redactado y sintetizado a partir de estas fuentes; no se reproducen fragmentos textuales extensos de ningún sitio, para respetar los derechos de autor de cada publicación.</p>
 
     <div class="reveal" style="margin-top:30px;">
-      <div class="sources-group">
-        <h4>Períodos generales de la Historia del Arte</h4>
+      <details class="sources-group" open>
+        <summary>Períodos generales de la Historia del Arte <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
         <ul>
           <li><a href="https://es.wikipedia.org/wiki/Historia_del_arte" target="_blank" rel="noopener">Historia del arte — Wikipedia</a></li>
           <li><a href="https://www.superprof.es/blog/historia-evolucion-artistica/" target="_blank" rel="noopener">Superprof — Historia de la pintura: las diferentes etapas del arte</a></li>
           <li><a href="https://www.euroinnova.com/blog/historia-del-arte-etapas" target="_blank" rel="noopener">Euroinnova — Las etapas de la historia del arte</a></li>
           <li><a href="https://www.kunstplaza.de/es/historia-del-arte/panorama-de-los-periodos-artisticos/" target="_blank" rel="noopener">Kunstplaza — Panorama de los períodos artísticos</a></li>
         </ul>
-      </div>
-      <div class="sources-group">
-        <h4>Las siete bellas artes / el cine como séptimo arte</h4>
+      </details>
+      <details class="sources-group">
+        <summary>Las siete bellas artes / el cine como séptimo arte <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
         <ul>
           <li><a href="https://es.wikipedia.org/wiki/Bellas_artes" target="_blank" rel="noopener">Bellas artes — Wikipedia</a></li>
           <li><a href="https://billiken.lat/saber-mas/bellas-artes-cuales-son-las-siete-y-donde-surgio-el-termino/" target="_blank" rel="noopener">Billiken — Bellas artes: ¿cuáles son las siete y dónde surgió el término?</a></li>
           <li><a href="https://www.telecinco.es/noticias/cultura/20240128/por-que-cine-llama-septimo-arte-be5m_18_011437365.html" target="_blank" rel="noopener">Telecinco — El origen de que al cine se le conozca como el séptimo arte</a></li>
           <li><a href="https://www.revistacentral.com.mx/cultura/las-7-bellas-artes-una-clasificacion-tradicional-nuevas-perspectivas" target="_blank" rel="noopener">Revista Central — Las 7 Bellas Artes: una clasificación tradicional con nuevas perspectivas</a></li>
         </ul>
-      </div>
-      <div class="sources-group">
-        <h4>Muralismo mexicano / Diego Rivera</h4>
+      </details>
+      <details class="sources-group">
+        <summary>Muralismo mexicano / Diego Rivera <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
         <ul>
           <li><a href="https://es.wikipedia.org/wiki/Diego_Rivera" target="_blank" rel="noopener">Diego Rivera — Wikipedia</a></li>
           <li><a href="https://comunicacionsocial.diputados.gob.mx/revista/index.php/raices/diego-rivera-el-color-del-nacionalismo" target="_blank" rel="noopener">Revista Cámara — Diego Rivera, el color del nacionalismo</a></li>
@@ -486,22 +504,16 @@
           <li><a href="https://mymodernmet.com/es/murales-diego-rivera/" target="_blank" rel="noopener">MyModernMet — Murales de Diego Rivera</a></li>
           <li><a href="https://www.antofagasta.tv/categoria/magazine/evolucion-muralismo-mexicano-diego-rivera-actualidad" target="_blank" rel="noopener">Antofagasta TV — La evolución del muralismo mexicano desde Diego Rivera hasta la actualidad</a></li>
         </ul>
-      </div>
-      <div class="sources-group">
-        <h4>Pop Art / Andy Warhol</h4>
+      </details>
+      <details class="sources-group">
+        <summary>Pop Art / Andy Warhol <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
         <ul>
           <li><a href="https://www.domestika.org/es/blog/6379-pop-art-que-es-caracteristicas-y-artistas-relevantes" target="_blank" rel="noopener">Domestika — Pop Art: qué es, características y artistas relevantes</a></li>
           <li><a href="https://www.ifema.es/noticias/arte/pop-art-que-es-artistas-caracteristicas" target="_blank" rel="noopener">IFEMA Madrid — Pop Art: qué es, artistas, obras y características</a></li>
           <li><a href="https://es.wikipedia.org/wiki/Andy_Warhol" target="_blank" rel="noopener">Andy Warhol — Wikipedia</a></li>
           <li><a href="https://www.alejandradeargos.com/index.php/es/completas/32-artistas/41805-andy-warhol-biografia-obras-y-exposiciones" target="_blank" rel="noopener">Alejandra de Argos — Andy Warhol: biografía, obras y exposiciones</a></li>
         </ul>
-      </div>
-      <div class="sources-group">
-        <h4>Frida Kahlo y Vincent van Gogh</h4>
-        <ul>
-          <li>Material base provisto por el equipo del proyecto (cartelera_arte.pdf), con datos biográficos y obras principales de ambos artistas.</li>
-        </ul>
-      </div>
+      </details>
       <p class="note">Nota metodológica: todo el contenido fue redactado y sintetizado a partir de estas fuentes. Para citas textuales o mayor profundidad sobre un punto específico, se recomienda visitar el enlace correspondiente.</p>
     </div>
   </div>
@@ -511,7 +523,7 @@
 <footer>
   <div class="wrap">
     <div class="mark">Día de Arte · 2026</div>
-    <p class="credit">Este sitio es un complemento digital de la cartelera de <em style="font-family:var(--font-serif); font-style:italic;">Historia del Arte 2026</em>, del corredor de murales, creada por <span class="names">Mariano Villares</span> e <span class="names">Ignacio Pujol</span>.</p>
+    <p class="credit">Este sitio es un complemento digital de la cartelera de <em style="font-family:var(--font-serif); font-style:italic;">Historia del Arte 2026</em>, del pasillo de murales, creada por <span class="names">Mariano Villares</span> e <span class="names">Ignacio Pujol</span>.</p>
     <div class="year">Corredor de murales · Día de Arte · 2026</div>
   </div>
 </footer>
