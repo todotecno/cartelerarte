@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://todotecno.github.io/cartelerarte/sitemap.xml
